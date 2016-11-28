@@ -1,0 +1,16 @@
+<div class="container">
+	<div ng-repeat='contact in contacts' class='well'>
+		<div ng-if="show[$index]">
+			email: <input type="text" ng-model="contact.emailAddress">
+			name: <input type="text" ng-model="contact.toWhom">			
+		</div>
+		<div ng-if="!show[$index]">
+			email: {{contact.emailAddress}} </br>
+			name: {{contact.toWhom}}</br>
+		</div>
+
+		<button class='btn btn-success' ng-if="!show[$index]" ng-click='edit(contact.id, $index)'>Edit</button>
+		<button class='btn btn-primary' ng-if="show[$index]" ng-click='change(contact, $index)'> confirm changes</button>
+		<button class='btn btn-danger' ng-click='delete(contact.id)'>Delete</button>
+	</div>
+</div>

@@ -8,9 +8,17 @@ var Review = require('./models/review');
 var Order = require('./models/order');
 var OrderItem = require('./models/orderitem');
 var Instrument = require('./models/instrument');
+var Email = require('./models/email');
+var Contact = require('./models/contact');
 
 // if we had more models, we could associate them in this file
 // e.g. User.hasMany(Reports)
+
+Contact.belongsTo(User);
+User.hasMany(Contact);
+
+User.hasMany(Email);
+Email.belongsTo(User);
 User.hasMany(Address);
 User.hasMany(Review);
 User.hasMany(Order);

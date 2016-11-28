@@ -1,28 +1,15 @@
 <section id="home">
-	<div class="jumbotron">
-    	<h1>The Best Stuff</h1>
-    	<p class="lead">Come check out our stuff if you want that goodness. For real, our stuff is like out of control it's so good.</p>
-    	<a class="btn btn-large btn-success" ui-sref="product">Start Shopping!</a>
-	</div>
-	<div class="container" ng-hide="!!user && user.orders.length">
-	<h2>Best Sellers</h2>
+	<div class = "container">
 
-		<div class="container">
-			<div class="row">
-				<div ng-repeat="product in bestSellers" class="col-xs-3">
-					<h3 class='text-center'>{{product.title}}</h3>
-					<a ui-sref="productDetail({ id: {{product.id}} })" class='thumbnail'>
-						<img class='img-responsive' ng-src="{{product.image[0]}}" style='width:100%;height:250px;'/>
-					</a>
-				</div>
-			</div>
-		</div>
-<!-- 		<div>
-		<div class='col-xs-12'>	
-			<ul class='list-group'>
-				<data-product-card ng-repeat='instrument in bestSellers' product="instrument"></data-product-card>	
-			</ul>
-			<br clear='all'>
-		</div>
-	</div> -->
+		<h1>Please log in, and then go the holiday card tab to start creating and sending holiday cards!</h1>
+		<h2>1. run npm install <h2>
+		<h2>2. create database and name it 'fsg' using postgres</h2>
+		<h2>3. run node seed <h2>
+		<h2>4. run gulp <h2>
+		<h2>5. run npm run start:dev <h2>
+		<h2>6. log in user name: ronpaul@gmail.com <h2>
+		<h2>7. password: 1111 <h2>
+
+	
+	</div>
 </section>

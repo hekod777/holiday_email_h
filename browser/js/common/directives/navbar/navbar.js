@@ -9,12 +9,14 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state, 
             scope.cart = ZCartFactory.cart;
 
             scope.items = [
-                { label: 'Home', state: 'home' },
-                { label: 'Products', state: 'product' },
-                { label: 'User Management', state: 'userMgmt', auth: "admin" },
-                { label: 'Product Management', state: 'productMgmt', auth: "admin" },
-                { label: 'Order Management', state: 'orderlist', auth: "admin" },
-                { label: 'My Profile', state: 'userProfile({id: user.id})', auth: "user" }
+                // { label: 'Home', state: 'home' },
+                // { label: 'Products', state: 'product' },
+                // { label: 'User Management', state: 'userMgmt', auth: "admin" },
+                // { label: 'Product Management', state: 'productMgmt', auth: "admin" },
+                // { label: 'Order Management', state: 'orderlist', auth: "admin" },
+                // { label: 'My Profile', state: 'userProfile({id: user.id})', auth: "user" },
+                { label: 'Holiday Card', state: 'card({status:"all"})', auth:"user"},
+                { label: 'Contact Management', state: 'contact', auth:"user"}
             ];
 
             scope.user = null;

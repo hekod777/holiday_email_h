@@ -1,0 +1,124 @@
+<div class="container">
+
+	<!-- <form name="searchForm">
+		<input type="text" ng-model="search.email">
+		<button class="btn btn-success" ng-click="searchEmail()"> search </button>
+	</form> -->
+
+	<form class="dark-matter" name="newEmailForm">
+		<label>
+			
+			<table>
+				
+
+				<tr>
+					<td>
+						<img class = "img-responsive inline-block" style = "width:600px; height:480px" ng-src="https://i.imgsafe.org/d66b332569.jpg">
+					</td>
+					<td>
+						<img class = "img-responsive inline-block" style = "width:600px; height:480px" ng-src="https://i.imgsafe.org/d66bdc541f.jpg">
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						<input type="radio" ng-model="newEmail.template" ng-value="goofy.name" class="w3-radio radio-inline"> <span class="kod-size2">goofy template</span>
+					</td>
+					<td>
+						<input type="radio" ng-model="newEmail.template" ng-value="donald.name" class="w3-radio radio-inline"> <span class="kod-size2">donald template</span>
+					</td>
+				</tr>
+
+			</table>
+		</label></br>
+		<label>
+			<span class="kod-size">Email:</span> 
+			<input type="email" ng-model="newEmail.emailAddress" uib-typeahead=" contact.emailAddress for contact in contacts | filter:$viewValue | limitTo: 4" required></br>
+		</label>
+		<label>
+			<span class="kod-size">To:</span> <input type="text" ng-model="newEmail.toWhom" uib-typeahead="contact.toWhom for contact in contacts | filter:$viewValue | limitTo: 4"></br>
+		</label>
+		<label>
+			<span class="kod-size">From:</span> <input type="text" ng-model="newEmail.fromWhom"></br>
+		</label>
+		<label>
+			<span class="kod-size">Reason:</span> <input type="text" ng-model="newEmail.reason"></br>
+		</label>
+		<label>
+			<span class="kod-size">Template:</span> <span class="kod-size">{{newEmail.template}}</span></br>
+		</label>
+		</br>
+		</br>
+		<div class="row">
+			<button class="btn btn-sample col-xs-6" ng-click="submitEmail()" ng-disabled="!newEmail.emailAddress || !newEmail.template || newEmailForm.input.$error.email">save this email</button>
+			<button class="btn btn-sample1 col-xs-6" ng-click="copyLast()">Copy the Last Email</button>
+		</div>
+	</form>
+
+	</br>
+	</br>
+	<button class = "btn btn-primary" ng-click="sentEmailOnly()">Display Sent Emails Only</button>&nbsp&nbsp
+	<button class = "btn btn-warning" ng-click="allEmails()">Display All Emails</button>&nbsp&nbsp
+	<button class = "btn btn-success" ng-click="pendingEmailOnly()">Display Pending Emails Only</button>
+	</br>
+	</br>
+
+	<div class="row">
+		<div ng-repeat = "item in emails">
+			<div class="clearfix" ng-if="$index % 2 ==0"></div>
+			<div class="col-xs-12 col-md-6">
+				<div ng-class="item.isSent ? 'panel panel-primary' : 'panel panel-crazy-red'">
+				<div class="panel-heading">
+					<h4 class='panel-title'>{{item.emailAddress}}</h4>
+				</div>
+					<div class="panel-body">
+						<div ng-if="!show[$index]">
+							<p class="kod-size">to: {{item.emailAddress}}</p>
+							<p class="kod-size">to whom: {{item.toWhom}}</p>
+							<p class="kod-size">from whom: {{item.fromWhom}}</p>
+							<p class="kod-size">reason:{{item.reason}}</p>
+							<p class="kod-size">template:{{item.template}}</p>
+						</div>
+
+						<div ng-if="show[$index]">
+							to: <input class = "kod-width" type ="text" ng-model="item.emailAddress"></br>
+							to whom: <input class = "kod-width" type ="text" ng-model="item.toWhom"></br>
+							from whom: <input class = "kod-width" type ="text" ng-model="item.fromWhom"></br>
+							reason:<input class = "kod-width" type ="text" ng-model="item.reason"></br>
+							template:<input class = "kod-width" type="text" ng-model="item.template"></br>
+							template:
+							<label>
+								<input type="radio" ng-model="item.template" ng-value="goofy.name" class="w3-radio radio-inline"> goofy
+								<input type="radio" ng-model="item.template" ng-value="donald.name" class="w3-radio radio-inline"> donald
+							</label></br>
+						</div>
+						<p ng-if="item.isSent" class="kod-size4"> Status: Sent</p>
+						<p ng-if="!item.isSent" class="kod-size3"> Status: Pending</p>
+
+
+						<button class="btn-orange" ng-click="kill(item.id)">Delete Email</button>
+						<button class="btn-super-blue" ng-click="copy(item)">Copy Email</button>
+						<button class="btn-green" ng-if="!item.isSent && !show[$index]" ng-click="edit($index)"> Edit Email</button>
+						<button class="btn-super-red" ng-if="!item.isSent && show[$index]" ng-click="submitChanges(item, $index)"> Confirm Changes</button>
+						<button class="btn-black" ng-if="!item.isSent && !show[$index]" ng-click="sendEmail(item, $index)"> Send this Email</button>
+						</br>
+						</br>
+					</div>
+					<label class="btn btn-default active center-block">
+  						<input ng-disabled="item.isSent" type="checkbox" name="selectedEmails[]" value="{{item}}" ng-checked="selection.indexOf(item.id) > -1" ng-click="toggleSelection(item, $index)"> <span class="kod-size">Select this email</span> 
+  					</label>
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<button ng-if="!sentStatus" ng-disabled="!canSendAll" class = "btn btn-danger" ng-click="sendAllEmails(emails)"> Send All the Pending Emails</button> &nbsp&nbsp&nbsp
+	<button ng-if="!sentStatus" ng-disabled="selection.length == 0 || !canSendAll" class = "btn btn-default" ng-click="sendAllSelectedEmails()" > Send All the Selected Pending Emails</button>
+
+	
+
+</div>
+

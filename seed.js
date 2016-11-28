@@ -28,6 +28,8 @@ var Order = db.model('order');//
 var Instrument = db.model('instrument');//
 var Review = db.model('review');
 var OrderItem = db.model('orderitem'); //added
+var Email = db.model('email');
+var Contact = db.model('contact');
 
 var numUsers = 10;//
 
@@ -40,13 +42,13 @@ var seedUsers = function () {
 
     var users = [
         {
-            email: 'obama@gmail.com',
-            password: 'potus',
-            firstName: 'Donald',
-            lastName: 'Trump',
-            phone: '888-888-8888',
+            email: 'ronpaul@gmail.com',
+            password: '1111',
+            firstName: 'ron',
+            lastName: 'paul',
+            phone: '777-777-7777',
             type: 'Admin',
-            avatar: faker.image.avatar()
+            //avatar: faker.image.avatar()
         },
 
         {
@@ -183,7 +185,98 @@ var seedReviews = function() {
     return Promise.all(creatingReviews);
 }
 
+var seedContact = function(){
+    var contacts=[];
+    contacts.push({
+        emailAddress:"superrichcard3@gmail.com",
+        toWhom:"donald",
+        userId:1,
+    });
+    contacts.push({
+        emailAddress:"superrichcard5@yahoo.com",
+        toWhom:"clinton",
+        userId:1,
+    });
 
+    contacts.push({
+        emailAddress:"test1@yahoo.com",
+        toWhom:"rubio",
+        userId:1,
+    });
+
+
+    contacts.push({
+        emailAddress:"test2@yahoo.com",
+        toWhom:"lying ted",
+        userId:1,
+    });
+
+
+    contacts.push({
+        emailAddress:"test3@yahoo.com",
+        toWhom:"ben",
+        userId:1,
+    });
+
+
+    contacts.push({
+        emailAddress:"test4@yahoo.com",
+        toWhom:"bush",
+        userId:1,
+    });
+
+
+    var creatingContacts = contacts.map(function (contactObj) {
+        return Contact.create(contactObj);
+    });
+
+    return Promise.all(creatingContacts);
+
+}
+
+
+
+var seedEmails = function(){
+    var emails= [];
+    
+    emails.push({
+        emailAddress: "superrichcard2@gmail.com",
+        toWhom: "donald",
+        fromWhom: "paul",
+        reason:"support in the presidential election.",
+        isSent:false,
+        userId:1,
+        template:"goofy",
+    });
+
+    emails.push({
+        emailAddress: "superrichcard3@gmail.com",
+        toWhom: "rino",
+        fromWhom: "paul",
+        reason:"contribution to the company. your last project was awsome!",
+        isSent:false,
+        userId:1,
+        template:"donald",
+    });
+
+    emails.push({
+        emailAddress: "superrichcard4@gmail.com",
+        toWhom: "clinton",
+        fromWhom: "paul",
+        reason:"being an easy opponent in the presidential election.",
+        isSent:false,
+        userId:1,
+        template:"goofy",
+    });
+
+    var creatingEmails = emails.map(function (emailObj) {
+        return Email.create(emailObj);
+    });
+
+    return Promise.all(creatingEmails);
+
+    
+}
 
 var seedOrderItems = function() {
 
@@ -236,7 +329,9 @@ db.sync({ force: true })
     .then(function() {
         return Promise.all([
             seedReviews(),
-            seedOrderItems()
+            seedOrderItems(),
+            seedEmails(),
+            seedContact(),
             ]);
     })
     .then(function () {
